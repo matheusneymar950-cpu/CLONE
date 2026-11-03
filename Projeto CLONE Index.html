@@ -1,0 +1,122 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#050b16">
+  <title>CLONE - Assistente Pessoal</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: #050b16;
+      color: white;
+      font-family: Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .container {
+      padding: 25px;
+      width: 100%;
+      max-width: 450px;
+    }
+
+    .circle {
+      width: 150px;
+      height: 150px;
+      border: 3px solid #00bfff;
+      border-radius: 50%;
+      margin: 25px auto;
+      box-shadow: 0 0 35px #008cff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+      color: #00bfff;
+    }
+
+    h1 {
+      color: #00bfff;
+      letter-spacing: 6px;
+    }
+
+    p {
+      color: #b7c8dc;
+    }
+
+    button {
+      background: #008cff;
+      border: none;
+      color: white;
+      padding: 15px 25px;
+      border-radius: 30px;
+      font-size: 16px;
+      margin-top: 15px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #006dcc;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="container">
+    <h1>CLONE</h1>
+
+    <div class="circle">C</div>
+
+    <h2>Assistente pessoal</h2>
+
+    <p id="status">Preparando o sistema...</p>
+
+    <button id="startButton">
+      Ativar o CLONE
+    </button>
+
+    <button id="repeatButton">
+      Repetir saudação
+    </button>
+  </main>
+
+  <audio id="welcomeAudio" preload="auto">
+    <source src="clone-boas-vindas.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    const audio = document.getElementById("welcomeAudio");
+    const status = document.getElementById("status");
+    const startButton = document.getElementById("startButton");
+    const repeatButton = document.getElementById("repeatButton");
+
+    async function saudacao() {
+      try {
+        audio.currentTime = 0;
+        await audio.play();
+        status.textContent = "CLONE está online.";
+      } catch (error) {
+        status.textContent =
+          "Toque em Ativar para ouvir minha saudação.";
+      }
+    }
+
+    startButton.addEventListener("click", saudacao);
+    repeatButton.addEventListener("click", saudacao);
+
+    window.addEventListener("load", () => {
+      saudacao();
+    });
+  </script>
+</body>
+  </html>
+  
