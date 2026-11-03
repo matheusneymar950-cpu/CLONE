@@ -2,121 +2,162 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#050b16">
-  <title>CLONE - Assistente Pessoal</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#050b16">
+<title>CLONE - Assistente Pessoal</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+<style>
+* {
+  box-sizing: border-box;
+}
 
-    body {
-      margin: 0;
-      min-height: 100vh;
-      background: #050b16;
-      color: white;
-      font-family: Arial, sans-serif;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-    }
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: radial-gradient(circle, #102744, #050b16 70%);
+  color: white;
+  font-family: Arial, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
 
-    .container {
-      padding: 25px;
-      width: 100%;
-      max-width: 450px;
-    }
+.container {
+  width: 100%;
+  max-width: 450px;
+  padding: 25px;
+}
 
-    .circle {
-      width: 150px;
-      height: 150px;
-      border: 3px solid #00bfff;
-      border-radius: 50%;
-      margin: 25px auto;
-      box-shadow: 0 0 35px #008cff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 48px;
-      color: #00bfff;
-    }
+h1 {
+  color: #00bfff;
+  letter-spacing: 8px;
+  font-size: 38px;
+}
 
-    h1 {
-      color: #00bfff;
-      letter-spacing: 6px;
-    }
+.circle {
+  width: 165px;
+  height: 165px;
+  border: 3px solid #00bfff;
+  border-radius: 50%;
+  margin: 30px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 65px;
+  color: #00bfff;
+  box-shadow: 0 0 25px #008cff,
+              inset 0 0 25px #008cff;
+  animation: pulse 2s infinite;
+}
 
-    p {
-      color: #b7c8dc;
-    }
+@keyframes pulse {
+  50% {
+    box-shadow: 0 0 45px #00bfff,
+                inset 0 0 35px #008cff;
+  }
+}
 
-    button {
-      background: #008cff;
-      border: none;
-      color: white;
-      padding: 15px 25px;
-      border-radius: 30px;
-      font-size: 16px;
-      margin-top: 15px;
-      cursor: pointer;
-    }
+h2 {
+  font-weight: 400;
+}
 
-    button:hover {
-      background: #006dcc;
-    }
-  </style>
+#status {
+  color: #00bfff;
+  margin: 25px 0;
+}
+
+button {
+  display: block;
+  width: 100%;
+  background: #008cff;
+  color: white;
+  border: none;
+  padding: 16px;
+  border-radius: 30px;
+  font-size: 16px;
+  margin-top: 15px;
+  cursor: pointer;
+}
+
+button:active {
+  transform: scale(.97);
+}
+
+.secondary {
+  background: transparent;
+  border: 1px solid #00bfff;
+}
+
+</style>
 </head>
 
 <body>
-  <main class="container">
-    <h1>CLONE</h1>
 
-    <div class="circle">C</div>
+<main class="container">
 
-    <h2>Assistente pessoal</h2>
+<h1>CLONE</h1>
 
-    <p id="status">Preparando o sistema...</p>
+<div class="circle">C</div>
 
-    <button id="startButton">
-      Ativar o CLONE
-    </button>
+<h2>Assistente pessoal</h2>
 
-    <button id="repeatButton">
-      Repetir saudação
-    </button>
-  </main>
+<p id="status">Sistema inicializado.</p>
 
-  <audio id="welcomeAudio" preload="auto">
-    <source src="clone-boas-vindas.mp3" type="audio/mpeg">
-  </audio>
+<button id="startButton">
+ATIVAR O CLONE
+</button>
 
-  <script>
-    const audio = document.getElementById("welcomeAudio");
-    const status = document.getElementById("status");
-    const startButton = document.getElementById("startButton");
-    const repeatButton = document.getElementById("repeatButton");
+<button id="repeatButton" class="secondary">
+REPETIR SAUDAÇÃO
+</button>
 
-    async function saudacao() {
-      try {
-        audio.currentTime = 0;
-        await audio.play();
-        status.textContent = "CLONE está online.";
-      } catch (error) {
-        status.textContent =
-          "Toque em Ativar para ouvir minha saudação.";
-      }
-    }
+<audio id="welcomeAudio" preload="auto">
+<source src="./clone-boas-vindas.mp3" type="audio/mpeg">
+</audio>
 
-    startButton.addEventListener("click", saudacao);
-    repeatButton.addEventListener("click", saudacao);
+</main>
 
-    window.addEventListener("load", () => {
-      saudacao();
-    });
-  </script>
+<script>
+
+const audio = document.getElementById("welcomeAudio");
+const status = document.getElementById("status");
+
+async function saudacao() {
+  status.textContent = "CLONE iniciando...";
+
+  try {
+    audio.currentTime = 0;
+    await audio.play();
+
+    status.textContent = "CLONE ONLINE";
+  } catch (error) {
+    status.textContent =
+      "Toque em ATIVAR O CLONE para ouvir.";
+  }
+}
+
+document.getElementById("startButton")
+.addEventListener("click", saudacao);
+
+document.getElementById("repeatButton")
+.addEventListener("click", saudacao);
+
+window.addEventListener("load", () => {
+  saudacao();
+});
+
+audio.addEventListener("ended", () => {
+  status.textContent = "CLONE ONLINE - Aguardando comando.";
+});
+
+audio.addEventListener("error", () => {
+  status.textContent = "Não foi possível carregar o áudio.";
+});
+
+</script>
+
 </body>
   </html>
   
