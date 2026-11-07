@@ -1,0 +1,24 @@
+
+{
+  "name": "clone-assistente",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build",
+    "start": "node .output/server/index.mjs"
+  },
+  "dependencies": {
+    "@tanstack/react-start": "latest",
+    "@tanstack/react-router": "latest",
+    "ai": "latest",
+    "@ai-sdk/openai": "latest",
+    "zod": "latest",
+    "react": "latest",
+    "react-dom": "latest"
+  },
+  "devDependencies": {
+    "vite": "latest",
+    "typescript": "latest"
+  }
+}
